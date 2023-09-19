@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [inputvalue, setInputValue] = useState("");
+  const [displayText, setDisplayText] = useState(false);
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const handleDisplayClick = () => {
+    setDisplayText((prev) => !prev);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Input Box App</h1>
+      <label htmlFor="input">Enter something:</label>
+      <input
+        type="text"
+        id="input"
+        value={inputvalue}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleDisplayClick}>Display Text</button>
+      {displayText && <p>{inputvalue}</p>}
     </div>
   );
 }
